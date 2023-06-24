@@ -6,6 +6,7 @@ import (
 	"github.com/Adam-Hoelscher/advent-of-code-2022/day01"
 	"github.com/Adam-Hoelscher/advent-of-code-2022/day02"
 	"github.com/Adam-Hoelscher/advent-of-code-2022/day03"
+	"github.com/Adam-Hoelscher/advent-of-code-2022/day04"
 )
 
 func main() {
@@ -13,5 +14,6 @@ func main() {
 	fmt.Println("Day 1:", day01.Answer())
 	fmt.Println("Day 2:", day02.Answer())
 	fmt.Println("Day 3:", day03.Answer())
+	fmt.Println("Day 4:", day04.Answer())
 	fmt.Println("Merry Christmas!")
 }
