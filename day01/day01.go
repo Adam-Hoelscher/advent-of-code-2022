@@ -3,7 +3,6 @@ package day01
 import (
 	"container/heap"
 	_ "embed"
-	"fmt"
 	"strconv"
 	"strings"
 
@@ -25,7 +24,6 @@ func solve(q string, max int) int {
 	for _, line := range strings.Split(q, "\n") {
 		val, err := strconv.Atoi(line)
 		if err != nil {
-			fmt.Println("add", curr)
 			heap.Push(h, curr)
 			if h.Len() > max {
 				heap.Pop(h)
