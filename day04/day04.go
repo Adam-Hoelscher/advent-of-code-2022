@@ -3,8 +3,6 @@ package day04
 import (
 	_ "embed"
 	"strconv"
-
-	_ "embed"
 	"strings"
 )
 
@@ -12,25 +10,36 @@ import (
 var Question string
 
 func Answer() []int {
-	return []int{solve(Question)}
+	return solve(Question)
 }
 
-func solve(q string) int {
+func solve(q string) []int {
 
-	var total int
+	var part, full int
 
-	for _, pair := range strings.Split(q, "\n") {
-		intervals := convertIntervals(pair)
-		a, b := intervals[0], intervals[1]
-		if a[0] >= b[0] && a[1] <= b[1] {
-			total++
-		} else if a[0] <= b[0] && a[1] >= b[1] {
-			total++
+	for _, line := range strings.Split(q, "\n") {
+
+		pairs := convertIntervals(line)
+		a, b := pairs[0], pairs[1]
+
+		if a[0] == b[0] {
+			part++
+			full++
+		} else if a[0] < b[0] && b[0] <= a[1] {
+			if b[1] <= a[1] {
+				full++
+			}
+			part++
+		} else if b[0] < a[0] && a[0] <= b[1] {
+			part++
+			if a[1] <= b[1] {
+				full++
+			}
 		}
 
 	}
 
-	return total
+	return []int{full, part}
 }
 
 func convertIntervals(pair string) [2][2]int {
