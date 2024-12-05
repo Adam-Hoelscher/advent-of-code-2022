@@ -2,6 +2,7 @@ package day06
 
 import (
 	_ "embed"
+	"math/bits"
 )
 
 //go:embed adventofcode.com_2022_day_6_input.txt
@@ -13,33 +14,18 @@ func Answer() []int {
 
 func solve(q string, n int) int {
 
-	var count [256]int
-	var uniq int
+	var set uint
 
-	for i := 0; i < len(q); i++ {
+	for _, r := range q[:n] {
+		set ^= 1 << (r % 26)
+	}
 
-		if uniq == n {
-			return i
+	for i, r := range q[n:] {
+		set ^= 1 << (r % 26)
+		set ^= 1 << (q[i] % 26)
+		if bits.OnesCount(set) == n {
+			return i + n + 1
 		}
-
-		count[q[i]]++
-		if count[q[i]] == 1 {
-			uniq++
-		} else if count[q[i]] == 2 {
-			uniq--
-		}
-
-		if i >= n {
-
-			count[q[i-n]]--
-			if count[q[i-n]] == 1 {
-				uniq++
-			} else if count[q[i-n]] == 0 {
-				uniq--
-			}
-
-		}
-
 	}
 
 	panic("Not found!")
